@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My First App</title>
+  <meta name="description" content="Learning AngularJS basics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+<body>
+
+
+<div ng-app="myFirstApp" ng-controller="myController">
+
+  <h1>My First App</h1>
+
+  {{ petBreed + " " + (petName | uppercase)}}
+  
+</div>
+
+<script>
+    var app = angular.module("myFirstApp", []);
+
+    app.controller("myController", function($scope) {
+        $scope.petBreed = "Poodle";
+        $scope.petName = "Fido";
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Reference</title>
+  <meta name="description" content="Learning AngularJS basics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 
+      Import this script in order to ________________ 
+  -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+<body>
+
+<!--
+    The ng-app ______ defines _______
+    The ng-controller ____ names the _______
+    The <div> tag owns the app named ____
+-->
+<div ng-app="petApp" ng-controller="petController">
+
+  <h1>List of Pets</h1>
+
+  <label for="rowContains">Find: </label>
+  <!--
+    ng-model will _______
+  -->
+  <input type="text" name="rowContains" ng-model="rowContains" />
+  <hr />
+
+  <table border="1" width="100%">
+    <tr>
+        <!--
+            ng-click will execute____ when you ____
+        -->
+        <th ng-click="orderByThis('name')">Name</th>
+        <th ng-click="orderByThis('breed')">Breed</th>
+        <!-- TODO: Complete the Status column directive -->
+        <th>Status</th>
+    </tr>
+
+    <!--
+        ng-repeat will __________
+        Output code is piped to two _____
+        filter: is used to _____
+        orderBy: is used to ____
+    -->
+    <tr ng-repeat="x in pets | filter:rowContains | orderBy:thisOrder">
+        <!--
+            Pipe expression text to a filter to ____
+        -->
+        <td>{{x.name | uppercase}}</td>
+        <td>{{x.breed | lowercase}}</td>
+        <!-- TODO: Complete the cell for status -->
+        <td>{{ }}</td>
+    </tr>
+  </table>
+  
+</div>
+
+<script>
+    // angular.module defines ____
+    // angular.controller defines ___
+    // controllers always belong to a ____
+    angular.module("petApp", []).controller("petController", function($scope) {
+        $scope.pets = [
+            {name: 'Spot', breed: 'Rat Terrier', status: 'trained'},
+            {name: 'Miss Kitty', breed: 'Tabby', status: 'trained'},
+            {name: 'Fido', breed: 'English Bulldog', status: 'trained'},
+            {name: 'Belle', breed: 'Dachshund', status: 'trained'},
+            {name: 'Lovey', breed: 'Persian', status: 'in progress'},
+            {name: 'Charles', breed: 'Poodle', status: 'in progress'}
+        ];
+        $scope.orderByThis = function(x) {
+            $scope.thisOrder = x;
+        }
+    });
+
+</script>
+
+</body>
+</html>

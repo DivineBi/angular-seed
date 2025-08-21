@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>List of Pets</title>
+  <meta name="description" content="Learning AngularJS basics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+<body>
+
+
+<div ng-app="petApp" ng-controller="petController">
+
+  <h1>List of Pets</h1>
+
+  <label for="rowContains">Find: </label>
+  <input type="text" name="rowContains" ng-model="rowContains" />
+  <hr />
+
+  <table border="1" width="100%">
+    <tr>
+        <th ng-click="orderByThis('name')">Name</th>
+        <th ng-click="orderByThis('breed')">Breed</th>
+    </tr>
+
+    <tr ng-repeat="x in pets | orderBy:thisOrder">
+        <td>{{x.name}}</td>
+        <td>{{x.breed}}</td>
+    </tr>
+  </table>
+  
+</div>
+
+<script>
+    angular.module("petApp", []).controller("petController", function($scope) {
+        $scope.pets = [
+            {name: 'Spot', breed: 'Rat Terrier'},
+            {name: 'Miss Kitty', breed: 'Tabby'},
+            {name: 'Fido', breed: 'English Bulldog'},
+            {name: 'Belle', breed: 'Dachshund'},
+            {name: 'Lovey', breed: 'Persian'},
+            {name: 'Charles', breed: 'Poodle'}
+        ];
+        $scope.orderByThis = function(x) {
+            $scope.thisOrder = x;
+        }
+    });
+
+</script>
+
+</body>
+</html>
