@@ -6,7 +6,7 @@
   <meta name="description" content="Learning AngularJS basics">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 
-      Import this script in order to ________________ 
+      Import this script in order to make it available in the app.
   -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -14,9 +14,9 @@
 <body>
 
 <!--
-    The ng-app ______ defines _______
-    The ng-controller ____ names the _______
-    The <div> tag owns the app named ____
+    The ng-app defines the name of the app
+    The ng-controller names the the controller for this app
+    The <div> tag owns the app named petApp
 -->
 <div ng-app="petApp" ng-controller="petController">
 
@@ -24,7 +24,7 @@
 
   <label for="rowContains">Find: </label>
   <!--
-    ng-model will _______
+    ng-model will associate the value of this HTML input field to application data.
   -->
   <input type="text" name="rowContains" ng-model="rowContains" />
   <hr />
@@ -32,37 +32,39 @@
   <table border="1" width="100%">
     <tr>
         <!--
-            ng-click will execute____ when you ____
+            ng-click will execute the defined function when you click on 
+            the heading in the html table.
         -->
         <th ng-click="orderByThis('name')">Name</th>
         <th ng-click="orderByThis('breed')">Breed</th>
         <!-- TODO: Complete the Status column directive -->
-        <th>Status</th>
+        <th ng-click="orderByThis('status')">Status</th>
     </tr>
 
     <!--
-        ng-repeat will __________
-        Output code is piped to two _____
-        filter: is used to _____
-        orderBy: is used to ____
+        ng-repeat will read the list called pets and draw an  HTML table row for each item in the list.
+        Output code is piped to two filters.
+        filter: is used to limit the rows that are displayed using the text that is found in the rowContains input.
+        orderBy: is calling the thisOrder function that is defined in the petController.
     -->
     <tr ng-repeat="x in pets | filter:rowContains | orderBy:thisOrder">
         <!--
-            Pipe expression text to a filter to ____
+            Pipe expression text to a filter to fortmat the value of the cell.
         -->
         <td>{{x.name | uppercase}}</td>
         <td>{{x.breed | lowercase}}</td>
         <!-- TODO: Complete the cell for status -->
-        <td>{{ }}</td>
+        <td>{{ x.status | lowercase}}</td>
     </tr>
   </table>
   
 </div>
 
 <script>
-    // angular.module defines ____
-    // angular.controller defines ___
-    // controllers always belong to a ____
+    // angular.module defines the app by binding the value of ng-app in a particular HTML element.
+    // angular.controller defines the controller name found in the ng-controller 
+    // value of a particular HTML element.
+    // controllers always belong to a module.
     angular.module("petApp", []).controller("petController", function($scope) {
         $scope.pets = [
             {name: 'Spot', breed: 'Rat Terrier', status: 'trained'},

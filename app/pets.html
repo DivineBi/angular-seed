@@ -25,9 +25,9 @@
         <th ng-click="orderByThis('breed')">Breed</th>
     </tr>
 
-    <tr ng-repeat="x in pets | orderBy:thisOrder">
-        <td>{{x.name}}</td>
-        <td>{{x.breed}}</td>
+    <tr ng-repeat="x in pets | filter:rowContains | orderBy:thisOrder">
+        <td>{{x.name | uppercase}}</td>
+        <td>{{x.breed | lowercase}}</td>
     </tr>
   </table>
   
